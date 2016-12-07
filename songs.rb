@@ -21,9 +21,17 @@ CreateSongsMigration.migrate(:up)
 
 
 class Song < ActiveRecord::Base
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  validates :runtime, numericality: true
+  validates :runtime, numericality: { greater_than: 10 }
 end
-
 
 Song.create!({ name: "Allentown", runtime: 432 })
 Song.create!({ name: "Uptown Girl", runtime: 654 })
 Song.create!({ name: "Goodnight Saigon", runtime: 200 })
+
+song = Song.new
+song.name = "Honesty"
+song.runtime = 454
+song.save
