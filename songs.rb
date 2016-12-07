@@ -5,7 +5,7 @@ ActiveRecord::Base.establish_connection(
   database: "db/song_list.sqlite"
 )
 
-class CreateSongsMigration < ActiveRecord::Migration
+class CreateSongsMigration < ActiveRecord::Migration[4.2]
   def change
     create_table :songs do |table|
       table.string :name
@@ -14,4 +14,5 @@ class CreateSongsMigration < ActiveRecord::Migration
   end
 end
 
+CreateSongsMigration.migrate(:down)
 CreateSongsMigration.migrate(:up)
